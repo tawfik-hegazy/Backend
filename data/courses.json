@@ -1,0 +1,22 @@
+[
+  {
+    "courseName": "Arabic",
+    "price": 120,
+    "teacherName": "Mr. Reda el farouk"
+  },
+  {
+    "courseName": "Physics",
+    "price": 90,
+    "teacherName": "Dr. Ismail al gamal"
+  },
+  {
+    "courseName": "Chemistry",
+    "price": 90,
+    "teacherName": "Dr. Amr el sayed"
+  },
+  {
+    "courseName": "Geology",
+    "price": 90,
+    "teacherName": "Mr. Sameh Nashaat"
+  }
+]

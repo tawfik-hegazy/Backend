@@ -4,6 +4,8 @@ const courseSchema = new mongoose.Schema({
   courseName: {
     type: String,
     required: true,
+    lowercase:true
+    
   },
   price: {
     type: Number,
@@ -12,7 +14,13 @@ const courseSchema = new mongoose.Schema({
   teacherName: {
     type: String,
     required: true,
+        lowercase:true
+
   },
+  image:{
+    type:String,
+    required:true
+  }
 });
 
 const Course = mongoose.model('Course', courseSchema);

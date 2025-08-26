@@ -17,11 +17,14 @@ const createCourse = async (req, res) => {
 
 const getAllCourses = async (req, res) => {
   try {
+    
     const courses = await Course.find();
     res.status(200).json({
       status: 'success',
       results: courses.length,
-      data: courses,
+      data:{ courses},
+       
+
     });
   } catch (err) {
     res.status(500).json({

@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
     minlength: [8, 'Minimum password length is 8 characters'],
   },
   photo: { type: String, default: 'profile.webp' },
- staredCourse: [String]
+ staredCourse: [{type:mongoose.Schema.Types.ObjectId,ref:'Course'}]
 });
 
 userSchema.pre('save', async function (next) {

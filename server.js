@@ -10,17 +10,21 @@ app.use(cors({
   origin: "*"
 }))
  
+connectDB();
+
 app.use(express.json());
 
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads/users')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads/courses')));
 
-connectDB();
 
 const userRouter = require('./routes/user.routes');
 const courseRouter = require('./routes/course.routes');
+const contactRouter=require('./routes/contact.routes')
 
 app.use('/users', userRouter);      
 app.use('/courses', courseRouter);   
+app.use('/contact', contactRouter);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

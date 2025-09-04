@@ -1,13 +1,13 @@
 const express = require("express");
 const userControllers = require("../controllers/user.controllers");
 const multerErrorHandler = require("../middleware/multer.error");
-const upload = require("../middleware/upload.multer");
+const {uploadUser} = require("../middleware/upload.multer");
 
 const router = express.Router();
 
 router.post(
   "/register",
-  upload.single("photo"),
+  uploadUser.single("photo"),
   multerErrorHandler,
   userControllers.signup
 );

@@ -1,30 +1,42 @@
 const Course = require('../models/course.model');
+const fs = require("fs");
+const path = require("path");  
 
 const createCourse = async (req, res) => {
   try {
-    const newCourse = await Course.create(req.body);
+    let courseData = { ...req.body };
+
+    if (req.file) {
+      courseData.image = req.file.filename;
+    }
+
+    const newCourse = await Course.create(courseData);
+
     res.status(201).json({
       status: 'success',
       data: newCourse,
     });
   } catch (err) {
+    if (req.file) {
+      fs.unlinkSync(
+        path.join(__dirname, "../uploads/courses", req.file.filename)
+      );
+    }
+
     res.status(400).json({
-      status: 'fail',
-      message: err.message,
+      status: "fail",
+      message: err.message
     });
   }
 };
 
 const getAllCourses = async (req, res) => {
   try {
-    
     const courses = await Course.find();
     res.status(200).json({
       status: 'success',
       results: courses.length,
-      data:{ courses},
-       
-
+      data: { courses },
     });
   } catch (err) {
     res.status(500).json({
@@ -45,7 +57,7 @@ const getCourseById = async (req, res) => {
     }
     res.status(200).json({
       status: 'success',
-      data: course,
+      data: {course},
     });
   } catch (err) {
     res.status(500).json({
@@ -64,7 +76,7 @@ const deletedCourseById = async (req, res) => {
         message: 'Course not found ',
       });
     }
-    res.status(204).json({
+    res.status(200).json({
       status: 'success',
       data: null,
     });
@@ -90,7 +102,7 @@ const updateCourseById = async (req, res) => {
     }
     res.status(200).json({
       status: 'success',
-      data: course,
+      data: {course},
     });
   } catch (err) {
     res.status(400).json({
